@@ -29,7 +29,21 @@ public class BankAccount {
         accountStatement.add(new Operation(OperationType.WITHDRAWAL, LocalDate.now(clock), amountToWithdraw));
     }
     public Amount getBalance() {
-        return balance;
+
+        Amount deposit = getAccountStatement()
+                .stream()
+                .filter(operation -> operation.operationType().equals(OperationType.DEPOSIT))
+                .parallel()
+                .reduce(Amount.valueOf(new BigDecimal("0.00")), (operation1, operation2) -> operation1.plus(operation2.amount()), Amount::plus);
+
+
+        Amount withdrawal = getAccountStatement()
+                .stream()
+                .filter(operation -> operation.operationType().equals(OperationType.WITHDRAWAL))
+                .parallel()
+                .reduce(Amount.valueOf(new BigDecimal("0.00")), (operation1, operation2) -> operation1.plus(operation2.amount()), Amount::plus);
+
+        return deposit.minus(withdrawal);
     }
 
     public List<Operation> getAccountStatement() {
