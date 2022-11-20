@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class BankAccount {
+    public static final Amount AMOUNT_ZERO = Amount.valueOf(new BigDecimal("0.00"));
     private AccountStatement accountStatement;
     private Clock clock;
 
@@ -26,20 +27,20 @@ public class BankAccount {
     }
     public Amount getBalance() {
 
-        Amount deposit = getAccountStatement()
+        Amount totalOfDeposits = getAccountStatement()
                 .stream()
                 .filter(operation -> operation.operationType().equals(OperationType.DEPOSIT))
                 .parallel()
-                .reduce(Amount.valueOf(new BigDecimal("0.00")), (operation1, operation2) -> operation1.plus(operation2.amount()), Amount::plus);
+                .reduce(AMOUNT_ZERO, (operation, nextOperation) -> operation.plus(nextOperation.amount()), Amount::plus);
 
 
-        Amount withdrawal = getAccountStatement()
+        Amount totalOfWithdrawal = getAccountStatement()
                 .stream()
                 .filter(operation -> operation.operationType().equals(OperationType.WITHDRAWAL))
                 .parallel()
-                .reduce(Amount.valueOf(new BigDecimal("0.00")), (operation1, operation2) -> operation1.plus(operation2.amount()), Amount::plus);
+                .reduce(AMOUNT_ZERO, (operation, nextOperation) -> operation.plus(nextOperation.amount()), Amount::plus);
 
-        return deposit.minus(withdrawal);
+        return totalOfDeposits.minus(totalOfWithdrawal);
     }
 
     public List<Operation> getAccountStatement() {
