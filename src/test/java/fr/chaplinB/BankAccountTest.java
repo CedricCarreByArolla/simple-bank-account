@@ -39,4 +39,19 @@ public class BankAccountTest {
         //Assert
         assertThat(bankAccount.getBalance()).isEqualTo(expectedBalance);
     }
+
+    @Test
+    void given_an_new_account_with_an_initial_deposit_of_an_amount_of_1500_when_I_withdraw_1500_should_update_balance_to_zero() {
+        //Arrange
+        BigDecimal amountToWithdrawAsBigDecimal = new BigDecimal("1500.00");
+        Amount amountToWithdraw = Amount.valueOf(amountToWithdrawAsBigDecimal);
+
+        BigDecimal expectedResultAsBigDecimal = new BigDecimal("0.00");
+
+        Amount expectedBalance = Amount.valueOf(expectedResultAsBigDecimal);
+        //Act
+        bankAccount.withdraw(amountToWithdraw);
+        //Assert
+        assertThat(bankAccount.getBalance()).isEqualTo(expectedBalance);
+    }
 }
