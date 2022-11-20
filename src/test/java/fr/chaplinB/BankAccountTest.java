@@ -1,3 +1,5 @@
+package fr.chaplinB;
+
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -18,7 +20,7 @@ public class BankAccountTest {
         BigDecimal initialAmountAsBigDecimal = new BigDecimal("1500.00");
         Amount initialAmountToDeposit = new Amount(initialAmountAsBigDecimal);
 
-        BankAccount bankAccount = new BankAccount(Amount initialAmountToDeposit);
+        BankAccount bankAccount = new BankAccount(initialAmountToDeposit);
 
         BigDecimal amountToDepositAsBigDecimal = new BigDecimal("500.00");
         Amount amountToDeposit = new Amount(amountToDepositAsBigDecimal);
