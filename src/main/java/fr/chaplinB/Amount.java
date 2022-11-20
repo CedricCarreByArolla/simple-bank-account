@@ -43,4 +43,8 @@ public final class Amount {
                 "amount=" + amount +
                 '}';
     }
+
+    public Amount minus(Amount anotherAmount) {
+        return Amount.valueOf(amount.subtract(anotherAmount.amount));
+    }
 }
