@@ -7,8 +7,8 @@ import java.util.List;
 
 public class BankAccount {
     public static final Amount AMOUNT_ZERO = Amount.valueOf(new BigDecimal("0.00"));
-    private AccountStatement accountStatement;
-    private Clock clock;
+    private final AccountStatement accountStatement;
+    private final Clock clock;
 
     public BankAccount(Amount initialAmountToDeposit, AccountStatement accountStatement, Clock clock) {
         this.accountStatement = accountStatement;
@@ -21,7 +21,7 @@ public class BankAccount {
     }
 
     public void withdraw(Amount amountToWithdraw) {
-        if(!isAuthorizedWithdrawal(amountToWithdraw))
+        if (!isAuthorizedWithdrawal(amountToWithdraw))
             throw new NotEnoughMoneyException("Vous n'avez pas assez d'argent pour effectuer cette opération !");
         accountStatement.add(new Operation(OperationType.WITHDRAWAL, LocalDate.now(clock), amountToWithdraw));
     }

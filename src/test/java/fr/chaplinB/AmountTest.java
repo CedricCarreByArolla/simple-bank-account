@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 
 class AmountTest {
     @Test
-    void two_instance_of_Amount_should_be_equals_if_their_attributes_value_are_equals(){
+    void two_instance_of_Amount_should_be_equals_if_their_attributes_value_are_equals() {
         //Arrange
         BigDecimal amountAsBig = new BigDecimal("100.01");
         //Act

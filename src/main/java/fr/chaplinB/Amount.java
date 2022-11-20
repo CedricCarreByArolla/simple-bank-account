@@ -6,12 +6,12 @@ import java.util.Objects;
 public final class Amount implements Comparable<Amount> {
     private final BigDecimal amount;
 
-    private Amount(BigDecimal amountAsBigDecimal){
+    private Amount(BigDecimal amountAsBigDecimal) {
         amount = amountAsBigDecimal;
     }
 
     public static Amount valueOf(BigDecimal amountAsBigDecimal) {
-        if(isNegativeNumber(amountAsBigDecimal))
+        if (isNegativeNumber(amountAsBigDecimal))
             throw new IllegalAmountException("Amount must be a positive number");
         return new Amount(amountAsBigDecimal);
     }
@@ -52,8 +52,7 @@ public final class Amount implements Comparable<Amount> {
     @Override
     public int compareTo(Amount o) {
         final int EQUAL = 0;
-        if(this.equals(o)) return EQUAL;
-        int comparison = this.amount.compareTo(o.amount);
-        return comparison;
+        if (this.equals(o)) return EQUAL;
+        return this.amount.compareTo(o.amount);
     }
 }

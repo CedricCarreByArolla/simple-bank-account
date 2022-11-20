@@ -17,14 +17,13 @@ public class BankAccountTest {
     Amount initialAmountToDeposit;
     AccountStatement accountStatement;
     BankAccount bankAccount;
-    private ClockTicker clockTicker;
 
     @BeforeEach
     void initialize() {
         initialAmountAsBigDecimal = new BigDecimal("1500.00");
         initialAmountToDeposit = Amount.valueOf(initialAmountAsBigDecimal);
         accountStatement = new AccountStatement();
-        clockTicker = new ClockTicker();
+        ClockTicker clockTicker = new ClockTicker();
         bankAccount = new BankAccount(initialAmountToDeposit, accountStatement, clockTicker);
     }
 
@@ -78,7 +77,7 @@ public class BankAccountTest {
     void should_record_an_operation_in_operations_when_I_open_an_account_with_the_amount_of_my_initial_deposit() {
         //Arrange
         Operation operation = new Operation(OperationType.DEPOSIT, LocalDate.of(2022, 12, 10), initialAmountToDeposit);
-        List<Operation> expectedResult = new ArrayList<>(){{
+        List<Operation> expectedResult = new ArrayList<>() {{
             add(operation);
         }};
         //Act
@@ -96,7 +95,7 @@ public class BankAccountTest {
         Operation depositWhenCreated = new Operation(OperationType.DEPOSIT, LocalDate.of(2022, 12, 10), initialAmountToDeposit);
         Operation withdrawal = new Operation(OperationType.WITHDRAWAL, LocalDate.of(2022, 12, 11), amountToDeposit);
 
-        List<Operation> expectedResult = new ArrayList<>(){{
+        List<Operation> expectedResult = new ArrayList<>() {{
             add(depositWhenCreated);
             add(withdrawal);
         }};
