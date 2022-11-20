@@ -13,7 +13,13 @@ public class BankAccount {
         balance = balance.plus(amountToDeposit);
     }
 
+    public void withdraw(Amount amountToWithdraw) {
+        if(this.balance.compareTo(amountToWithdraw) <= 0)
+            throw new NotEnoughMoneyException("Vous n'avez pas assez d'argent pour effectuer cette opération !");
+        balance = balance.minus(amountToWithdraw);
+    }
     public Amount getBalance() {
         return balance;
     }
+
 }

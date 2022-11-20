@@ -23,9 +23,22 @@ class AmountTest {
     void should_always_be_positive_number() {
         //Arrange
         BigDecimal negativeNumber = new BigDecimal("-100.00");
-        Throwable throwable = new IllegalAmountException("amount must be positive number !");
         //Act
         Throwable thrown = catchThrowable(() -> Amount.valueOf(negativeNumber));
+        //Assert
+        assertThat(thrown).isInstanceOf(IllegalAmountException.class);
+    }
+
+    @Test
+    void should_thrown_an_IllegalOperation_when_Amount_minus_bigger_Amount() {
+        //Arrange
+        BigDecimal firstBig = new BigDecimal("100.00");
+        BigDecimal secondBig = new BigDecimal("200.00");
+
+        Amount amount = Amount.valueOf(firstBig);
+        Amount biggerAmount = Amount.valueOf(secondBig);
+        //Act
+        Throwable thrown = catchThrowable(() -> amount.minus(biggerAmount));
         //Assert
         assertThat(thrown).isInstanceOf(IllegalAmountException.class);
     }
