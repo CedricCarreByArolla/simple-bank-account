@@ -11,6 +11,8 @@ public final class Amount {
     }
 
     public static Amount valueOf(BigDecimal amountAsBigDecimal) {
+        if(BigDecimal.ZERO.compareTo(amountAsBigDecimal) > 0)
+            throw new IllegalAmountException("Amount must be a positive number");
         return new Amount(amountAsBigDecimal);
     }
 
