@@ -4,6 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
@@ -12,13 +15,16 @@ public class BankAccountTest {
 
     BigDecimal initialAmountAsBigDecimal;
     Amount initialAmountToDeposit;
+    AccountStatement accountStatement;
     BankAccount bankAccount;
 
     @BeforeEach
     void initialize() {
         initialAmountAsBigDecimal = new BigDecimal("1500.00");
         initialAmountToDeposit = Amount.valueOf(initialAmountAsBigDecimal);
-        bankAccount = new BankAccount(initialAmountToDeposit);
+        accountStatement = new AccountStatement();
+        ClockTicker clockTicker = new ClockTicker();
+        bankAccount = new BankAccount(initialAmountToDeposit, accountStatement, clockTicker);
     }
 
     @Test
@@ -65,5 +71,37 @@ public class BankAccountTest {
         Throwable thrown = catchThrowable(() -> bankAccount.withdraw(amountToWithdraw));
         //Assert
         assertThat(thrown).isInstanceOf(NotEnoughMoneyException.class);
+    }
+
+    @Test
+    void should_record_an_operation_in_operations_when_I_open_an_account_with_the_amount_of_my_initial_deposit() {
+        //Arrange
+        Operation operation = new Operation(OperationType.DEPOSIT, LocalDate.of(2022, 12, 10), initialAmountToDeposit);
+        List<Operation> expectedResult = new ArrayList<>() {{
+            add(operation);
+        }};
+        //Act
+
+        //Assert
+        assertThat(bankAccount.getAccountStatement()).isEqualTo(expectedResult);
+    }
+
+    @Test
+    void should_record_2_operations_in_operations_when_I_withdraw_500_the_day_after() {
+        //Arrange
+        BigDecimal amountToDepositAsBigDecimal = new BigDecimal("500.00");
+        Amount amountToDeposit = Amount.valueOf(amountToDepositAsBigDecimal);
+
+        Operation depositWhenCreated = new Operation(OperationType.DEPOSIT, LocalDate.of(2022, 12, 10), initialAmountToDeposit);
+        Operation withdrawal = new Operation(OperationType.WITHDRAWAL, LocalDate.of(2022, 12, 11), amountToDeposit);
+
+        List<Operation> expectedResult = new ArrayList<>() {{
+            add(depositWhenCreated);
+            add(withdrawal);
+        }};
+        //Act
+        bankAccount.withdraw(amountToDeposit);
+        //Assert
+        assertThat(bankAccount.getAccountStatement()).isEqualTo(expectedResult);
     }
 }
