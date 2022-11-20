@@ -14,7 +14,7 @@ public class BankAccount {
     }
 
     public void withdraw(Amount amountToWithdraw) {
-        throw new UnsupportedOperationException();
+        balance = balance.minus(amountToWithdraw);
     }
     public Amount getBalance() {
         return balance;
