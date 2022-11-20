@@ -2,8 +2,11 @@ package fr.chaplinB;
 
 public class BankAccount {
 
+    private Amount balance;
+
     public BankAccount(Amount initialAmountToDeposit) {
-        throw new UnsupportedOperationException();
+
+        balance = initialAmountToDeposit;
     }
 
     public void deposit(Amount amountToDeposit) {
@@ -11,6 +14,6 @@ public class BankAccount {
     }
 
     public Amount getBalance() {
-        throw new UnsupportedOperationException();
+        return balance;
     }
 }

@@ -2,8 +2,10 @@ package fr.chaplinB;
 
 import java.math.BigDecimal;
 
-public class Amount {
-    public Amount(BigDecimal amountAsBigDecimal) {
+public final class Amount {
+    private final BigDecimal amount;
 
+    public Amount(BigDecimal amountAsBigDecimal) {
+        amount = amountAsBigDecimal;
     }
 }
