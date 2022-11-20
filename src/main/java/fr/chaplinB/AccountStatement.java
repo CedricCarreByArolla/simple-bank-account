@@ -1,2 +1,12 @@
-package fr.chaplinB;public class AccountStatement {
+package fr.chaplinB;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AccountStatement {
+    List<Operation> operations = new ArrayList<>();
+
+    public List<Operation> getAll() {
+        return operations;
+    }
 }
