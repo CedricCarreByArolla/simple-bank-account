@@ -1,5 +1,7 @@
 package fr.chaplinB;
 
+import java.util.List;
+
 public class BankAccount {
 
     private Amount balance;
@@ -22,4 +24,7 @@ public class BankAccount {
         return balance;
     }
 
+    public List<Operation> getAccountStatement() {
+        throw new UnsupportedOperationException();
+    }
 }
