@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.time.Clock;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +16,16 @@ public class BankAccountTest {
 
     BigDecimal initialAmountAsBigDecimal;
     Amount initialAmountToDeposit;
+    AccountStatement accountStatement;
     BankAccount bankAccount;
+    private Clock clock;
 
     @BeforeEach
     void initialize() {
         initialAmountAsBigDecimal = new BigDecimal("1500.00");
         initialAmountToDeposit = Amount.valueOf(initialAmountAsBigDecimal);
-        bankAccount = new BankAccount(initialAmountToDeposit);
+        accountStatement = new AccountStatement();
+        bankAccount = new BankAccount(initialAmountToDeposit, accountStatement, clock);
     }
 
     @Test
