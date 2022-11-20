@@ -19,7 +19,7 @@ public final class Amount {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Amount that = (Amount) o;
-        return amount.equals(that.amount);
+        return Objects.equals(amount, that.amount);
     }
 
     @Override
