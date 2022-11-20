@@ -3,10 +3,10 @@ package fr.chaplinB;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public final class Amount {
+public final class Amount implements Comparable<Amount> {
     private final BigDecimal amount;
 
-    private Amount(BigDecimal amountAsBigDecimal) {
+    private Amount(BigDecimal amountAsBigDecimal){
         amount = amountAsBigDecimal;
     }
 
@@ -46,5 +46,14 @@ public final class Amount {
 
     public Amount minus(Amount anotherAmount) {
         return Amount.valueOf(amount.subtract(anotherAmount.amount));
+    }
+
+
+    @Override
+    public int compareTo(Amount o) {
+        final int EQUAL = 0;
+        if(this.equals(o)) return EQUAL;
+        int comparison = this.amount.compareTo(o.amount);
+        return comparison;
     }
 }
