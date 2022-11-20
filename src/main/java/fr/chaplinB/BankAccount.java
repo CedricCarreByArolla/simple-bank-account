@@ -26,6 +26,7 @@ public class BankAccount {
         if(this.balance.compareTo(amountToWithdraw) < 0)
             throw new NotEnoughMoneyException("Vous n'avez pas assez d'argent pour effectuer cette opération !");
         balance = balance.minus(amountToWithdraw);
+        accountStatement.add(new Operation(OperationType.WITHDRAWAL, LocalDate.now(clock), amountToWithdraw));
     }
     public Amount getBalance() {
         return balance;
