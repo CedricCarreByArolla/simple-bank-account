@@ -1,5 +1,6 @@
 package fr.chaplinB;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -7,6 +8,17 @@ import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BankAccountTest {
+
+    BigDecimal initialAmountAsBigDecimal;
+    Amount initialAmountToDeposit;
+    BankAccount bankAccount;
+
+    @BeforeEach
+    void initialize() {
+        initialAmountAsBigDecimal = new BigDecimal("1500.00");
+        initialAmountToDeposit = Amount.valueOf(initialAmountAsBigDecimal);
+        bankAccount = new BankAccount(initialAmountToDeposit);
+    }
 
     @Test
     void should_be_always_true() {
@@ -17,11 +29,6 @@ public class BankAccountTest {
     void
     given_an_new_account_with_an_initial_deposit_of_an_amount_of_1500_when_we_deposit_500_should_return_a_balance_of_2000() {
         //Arrange
-        BigDecimal initialAmountAsBigDecimal = new BigDecimal("1500.00");
-        Amount initialAmountToDeposit = Amount.valueOf(initialAmountAsBigDecimal);
-
-        BankAccount bankAccount = new BankAccount(initialAmountToDeposit);
-
         BigDecimal amountToDepositAsBigDecimal = new BigDecimal("500.00");
         Amount amountToDeposit = Amount.valueOf(amountToDepositAsBigDecimal);
 
