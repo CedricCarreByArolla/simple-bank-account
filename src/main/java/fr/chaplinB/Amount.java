@@ -6,8 +6,12 @@ import java.util.Objects;
 public final class Amount {
     private final BigDecimal amount;
 
-    public Amount(BigDecimal amountAsBigDecimal) {
+    private Amount(BigDecimal amountAsBigDecimal) {
         amount = amountAsBigDecimal;
+    }
+
+    public static Amount valueOf(BigDecimal amountAsBigDecimal) {
+        return new Amount(amountAsBigDecimal);
     }
 
     public Amount plus(Amount anotherAmount) {
