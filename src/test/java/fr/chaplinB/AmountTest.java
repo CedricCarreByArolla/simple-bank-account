@@ -23,7 +23,6 @@ class AmountTest {
     void should_always_be_positive_number() {
         //Arrange
         BigDecimal negativeNumber = new BigDecimal("-100.00");
-        Throwable throwable = new IllegalAmountException("amount must be positive number !");
         //Act
         Throwable thrown = catchThrowable(() -> Amount.valueOf(negativeNumber));
         //Assert
