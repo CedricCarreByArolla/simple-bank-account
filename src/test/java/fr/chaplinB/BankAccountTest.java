@@ -70,7 +70,7 @@ public class BankAccountTest {
     }
 
     @Test
-    void should_record_an_operation_in_operations_when_I_open_an_account_whenever_the_amount_of_my_initial_deposit() {
+    void should_record_an_operation_in_operations_when_I_open_an_account_with_the_amount_of_my_initial_deposit() {
         //Arrange
         Operation operation = new Operation(OperationType.DEPOSIT, LocalDate.of(2022, 12, 10), initialAmountToDeposit);
         List<Operation> expectedResult = new ArrayList<Operation>(){{
