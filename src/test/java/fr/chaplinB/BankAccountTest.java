@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 public class BankAccountTest {
 
@@ -53,5 +54,16 @@ public class BankAccountTest {
         bankAccount.withdraw(amountToWithdraw);
         //Assert
         assertThat(bankAccount.getBalance()).isEqualTo(expectedBalance);
+    }
+
+    @Test
+    void should_raise_NotEnoughMoneyException_when_I_try_to_withdraw_an_amount_of_1501_when_the_balance_is_1500() {
+        //Arrange
+        BigDecimal amountAsBigDecimal = new BigDecimal("1501.00");
+        Amount amountToWithdraw = Amount.valueOf(amountAsBigDecimal);
+        //Act
+        Throwable thrown = catchThrowable(() -> bankAccount.withdraw(amountToWithdraw));
+        //Assert
+        assertThat(thrown).isInstanceOf(NotEnoughMoneyException.class);
     }
 }
