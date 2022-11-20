@@ -1,6 +1,5 @@
 package fr.chaplinB;
 
-import javax.management.openmbean.CompositeData;
 import java.util.List;
 
 public class BankAccount {
@@ -18,7 +17,7 @@ public class BankAccount {
     }
 
     public void withdraw(Amount amountToWithdraw) {
-        if(this.balance.compareTo(amountToWithdraw) <= 0)
+        if(this.balance.compareTo(amountToWithdraw) < 0)
             throw new NotEnoughMoneyException("Vous n'avez pas assez d'argent pour effectuer cette opération !");
         balance = balance.minus(amountToWithdraw);
     }
