@@ -9,4 +9,8 @@ public class AccountStatement {
     public List<Operation> getAll() {
         return operations;
     }
+
+    public void add(Operation operation) {
+        operations.add(operation);
+    }
 }
