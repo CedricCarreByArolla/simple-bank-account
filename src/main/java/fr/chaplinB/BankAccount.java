@@ -10,7 +10,7 @@ public class BankAccount {
     }
 
     public void deposit(Amount amountToDeposit) {
-        throw new UnsupportedOperationException();
+        balance = balance.plus(amountToDeposit);
     }
 
     public Amount getBalance() {
