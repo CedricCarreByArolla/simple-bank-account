@@ -1,15 +1,15 @@
 package fr.chaplinB;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class BankAccount {
 
-    private Amount balance;
+    private Amount balance = Amount.valueOf(new BigDecimal("0.00"));
     private AccountStatement accountStatement;
 
     public BankAccount(Amount initialAmountToDeposit) {
-
-        balance = initialAmountToDeposit;
+        deposit(initialAmountToDeposit);
     }
 
     public void deposit(Amount amountToDeposit) {
