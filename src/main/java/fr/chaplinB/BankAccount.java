@@ -1,10 +1,12 @@
 package fr.chaplinB;
 
+import javax.management.openmbean.CompositeData;
 import java.util.List;
 
 public class BankAccount {
 
     private Amount balance;
+    private AccountStatement accountStatement;
 
     public BankAccount(Amount initialAmountToDeposit) {
 
@@ -25,6 +27,6 @@ public class BankAccount {
     }
 
     public List<Operation> getAccountStatement() {
-        throw new UnsupportedOperationException();
+        return this.accountStatement.getAll();
     }
 }
