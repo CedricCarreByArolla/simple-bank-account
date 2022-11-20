@@ -13,7 +13,11 @@ public class BankAccount {
         balance = balance.plus(amountToDeposit);
     }
 
+    public void withdraw(Amount amountToWithdraw) {
+        throw new UnsupportedOperationException();
+    }
     public Amount getBalance() {
         return balance;
     }
+
 }
