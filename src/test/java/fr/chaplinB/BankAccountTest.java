@@ -86,4 +86,23 @@ public class BankAccountTest {
         //Assert
         assertThat(bankAccount.getAccountStatement()).isEqualTo(expectedResult);
     }
+
+    @Test
+    void should_record_2_operations_in_operations_when_I_withdraw_500_the_day_after() {
+        //Arrange
+        BigDecimal amountToDepositAsBigDecimal = new BigDecimal("500.00");
+        Amount amountToDeposit = Amount.valueOf(amountToDepositAsBigDecimal);
+
+        Operation depositWhenCreated = new Operation(OperationType.DEPOSIT, LocalDate.of(2022, 12, 10), initialAmountToDeposit);
+        Operation withdrawal = new Operation(OperationType.WITHDRAWAL, LocalDate.of(2022, 12, 11), amountToDeposit);
+
+        List<Operation> expectedResult = new ArrayList<>(){{
+            add(depositWhenCreated);
+            add(withdrawal);
+        }};
+        //Act
+        bankAccount.withdraw(amountToDeposit);
+        //Assert
+        assertThat(bankAccount.getAccountStatement()).isEqualTo(expectedResult);
+    }
 }
