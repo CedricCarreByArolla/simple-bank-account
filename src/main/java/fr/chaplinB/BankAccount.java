@@ -8,6 +8,8 @@ import java.util.List;
 public class BankAccount {
     public static final Amount AMOUNT_ZERO = Amount.valueOf(new BigDecimal("0.00"));
     private final AccountStatement accountStatement;
+
+    private StatementPrinter statementPrinter = new StatementPrinter();
     private final Clock clock;
 
     public BankAccount(Amount initialAmountToDeposit, AccountStatement accountStatement, Clock clock) {
@@ -51,5 +53,9 @@ public class BankAccount {
 
     public List<Operation> getAccountStatement() {
         return this.accountStatement.getAll();
+    }
+
+    public void printStatement() {
+        statementPrinter.print(getAccountStatement());
     }
 }
