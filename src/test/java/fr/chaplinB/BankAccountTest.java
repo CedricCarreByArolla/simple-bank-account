@@ -11,12 +11,12 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-public class BankAccountTest {
+class BankAccountTest {
 
-    BigDecimal initialAmountAsBigDecimal;
-    Amount initialAmountToDeposit;
-    AccountStatement accountStatement;
-    BankAccount bankAccount;
+    private BigDecimal initialAmountAsBigDecimal;
+    private Amount initialAmountToDeposit;
+    private AccountStatement accountStatement;
+    private BankAccount bankAccount;
 
     @BeforeEach
     void initialize() {
@@ -28,22 +28,17 @@ public class BankAccountTest {
     }
 
     @Test
-    void should_be_always_true() {
-        assertThat(true).isTrue();
-    }
-
-    @Test
     void
     given_an_new_account_with_an_initial_deposit_of_an_amount_of_1500_when_we_deposit_500_should_return_a_balance_of_2000() {
         //Arrange
         BigDecimal amountToDepositAsBigDecimal = new BigDecimal("500.00");
         Amount amountToDeposit = Amount.valueOf(amountToDepositAsBigDecimal);
-
-        BigDecimal expectedAsBigDecimal = new BigDecimal("2000.00");
-        Amount expectedBalance = Amount.valueOf(expectedAsBigDecimal);
         //Act
         bankAccount.deposit(amountToDeposit);
         //Assert
+        BigDecimal expectedAsBigDecimal = new BigDecimal("2000.00");
+        Amount expectedBalance = Amount.valueOf(expectedAsBigDecimal);
+
         assertThat(bankAccount.getBalance()).isEqualTo(expectedBalance);
     }
 
@@ -52,13 +47,12 @@ public class BankAccountTest {
         //Arrange
         BigDecimal amountToWithdrawAsBigDecimal = new BigDecimal("1500.00");
         Amount amountToWithdraw = Amount.valueOf(amountToWithdrawAsBigDecimal);
-
-        BigDecimal expectedResultAsBigDecimal = new BigDecimal("0.00");
-
-        Amount expectedBalance = Amount.valueOf(expectedResultAsBigDecimal);
         //Act
         bankAccount.withdraw(amountToWithdraw);
         //Assert
+        BigDecimal expectedResultAsBigDecimal = new BigDecimal("0.00");
+        Amount expectedBalance = Amount.valueOf(expectedResultAsBigDecimal);
+
         assertThat(bankAccount.getBalance()).isEqualTo(expectedBalance);
     }
 
@@ -77,12 +71,13 @@ public class BankAccountTest {
     void should_record_an_operation_in_operations_when_I_open_an_account_with_the_amount_of_my_initial_deposit() {
         //Arrange
         Operation operation = new Operation(OperationType.DEPOSIT, LocalDate.of(2022, 12, 10), initialAmountToDeposit);
-        List<Operation> expectedResult = new ArrayList<>() {{
-            add(operation);
-        }};
         //Act
 
         //Assert
+        List<Operation> expectedResult = new ArrayList<>() {{
+            add(operation);
+        }};
+
         assertThat(bankAccount.getAccountStatement()).isEqualTo(expectedResult);
     }
 
@@ -95,13 +90,14 @@ public class BankAccountTest {
         Operation depositWhenCreated = new Operation(OperationType.DEPOSIT, LocalDate.of(2022, 12, 10), initialAmountToDeposit);
         Operation withdrawal = new Operation(OperationType.WITHDRAWAL, LocalDate.of(2022, 12, 11), amountToDeposit);
 
+        //Act
+        bankAccount.withdraw(amountToDeposit);
+        //Assert
         List<Operation> expectedResult = new ArrayList<>() {{
             add(depositWhenCreated);
             add(withdrawal);
         }};
-        //Act
-        bankAccount.withdraw(amountToDeposit);
-        //Assert
+
         assertThat(bankAccount.getAccountStatement()).isEqualTo(expectedResult);
     }
 }
