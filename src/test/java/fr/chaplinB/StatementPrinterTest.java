@@ -18,18 +18,21 @@ class StatementPrinterTest {
     private Amount initialAmount;
     private AccountStatement accountStatement;
 
+    BankAccount bankAccount;
+
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
         clockTicker = new ClockTicker();
         initialAmount = Amount.valueOf(new BigDecimal("200"));
         accountStatement = new AccountStatement();
+        bankAccount = new BankAccount(initialAmount, accountStatement, clockTicker);
     }
 
     @Test
     void should_print_account_statement_header_and_initial_operation() {
         //Arrange
-        BankAccount bankAccount = new BankAccount(initialAmount, accountStatement, clockTicker);
+
         //Act
         bankAccount.printStatement();
         //Assert
