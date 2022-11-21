@@ -39,9 +39,7 @@ public final class Amount implements Comparable<Amount> {
 
     @Override
     public String toString() {
-        return "Amount{" +
-                "amount=" + amount +
-                '}';
+        return "" + amount;
     }
 
     public Amount minus(Amount anotherAmount) {
