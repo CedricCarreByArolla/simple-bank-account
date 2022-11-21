@@ -17,8 +17,7 @@ class StatementPrinterTest {
     private ClockTicker clockTicker;
     private Amount initialAmount;
     private AccountStatement accountStatement;
-
-    BankAccount bankAccount;
+    private BankAccount bankAccount;
 
     @BeforeEach
     public void setUp() {
