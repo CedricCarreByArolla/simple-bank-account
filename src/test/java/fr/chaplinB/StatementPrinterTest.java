@@ -30,14 +30,15 @@ class StatementPrinterTest {
     }
 
     @Test
-    void should_print_account_statement_header_and_initial_operation() {
+    void should_print_account_statement_header_and_initial_operation_and_footer_as_balance() {
         //Arrange
 
         //Act
         bankAccount.printStatement();
         //Assert
         String expectedResult = "Operation | Date | Amount\r\n" +
-                                "DEPOSIT | 2022-12-10 | 200";
+                                "DEPOSIT | 2022-12-10 | 200\r\n" +
+                                "Your balance : 100";
         assertThat(outputStreamCaptor.toString().trim()).isEqualTo(expectedResult);
     }
 
