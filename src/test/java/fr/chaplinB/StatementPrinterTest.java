@@ -36,9 +36,10 @@ class StatementPrinterTest {
         //Act
         bankAccount.printStatement();
         //Assert
-        String expectedResult = "Operation | Date | Amount\r\n" +
-                                "DEPOSIT | 2022-12-10 | 200.00\r\n" +
-                                "Your balance : 200.00";
+        String expectedResult = """
+                Operation | Date | Amount\r
+                DEPOSIT | 2022-12-10 | 200.00\r
+                Your balance : 200.00""";
         assertThat(outputStreamCaptor.toString().trim()).isEqualTo(expectedResult);
     }
 
