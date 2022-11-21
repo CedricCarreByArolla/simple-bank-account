@@ -21,13 +21,14 @@ public class BankAccount {
     }
 
     public void withdraw(Amount amountToWithdraw) {
-        if (!isAuthorizedWithdrawal(amountToWithdraw))
+        if (isNotAuthorizedWithdrawal(amountToWithdraw)) {
             throw new NotEnoughMoneyException("Vous n'avez pas assez d'argent pour effectuer cette opération !");
+        }
         accountStatement.add(new Operation(OperationType.WITHDRAWAL, LocalDate.now(clock), amountToWithdraw));
     }
 
-    private boolean isAuthorizedWithdrawal(Amount amountToWithdraw) {
-        return getBalance().compareTo(amountToWithdraw) >= 0;
+    private boolean isNotAuthorizedWithdrawal(Amount amountToWithdraw) {
+        return getBalance().compareTo(amountToWithdraw) < 0;
     }
 
     public Amount getBalance() {
