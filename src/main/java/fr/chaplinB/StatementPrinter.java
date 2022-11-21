@@ -3,8 +3,16 @@ package fr.chaplinB;
 import java.util.List;
 
 public class StatementPrinter {
+
+    public static final String HEADER = "Operation | Date | Amount";
+
     public void print(List<Operation> allOperations, Amount balance) {
-        System.out.println("Operation | Date | Amount");
+        printHeader();
+        printStatementLines(allOperations);
+        printBalance("Your balance : " + balance);
+    }
+
+    private void printStatementLines(List<Operation> allOperations) {
         allOperations.forEach(
                 operation -> {
                     System.out.println(operation.operationType().toString() +
@@ -14,6 +22,12 @@ public class StatementPrinter {
                             operation.amount().toString());
                 }
         );
-        System.out.println("Your balance : " + balance);
+    }
+
+    private void printHeader() {
+        System.out.println(HEADER);
+    }
+    private void printBalance(String balance) {
+        System.out.println(balance);
     }
 }
