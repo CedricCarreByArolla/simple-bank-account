@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StatementPrinterTest {
+class StatementPrinterTest {
 
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
@@ -30,7 +30,7 @@ public class StatementPrinterTest {
         //Act
         bankAccount.printStatement();
         //Assert
-        String expectedResult = "Operation | Date | Amount\n" +
+        String expectedResult = "Operation | Date | Amount\r\n" +
                                 "DEPOSIT | 2022-12-10 | 200";
         assertThat(outputStreamCaptor.toString().trim()).isEqualTo(expectedResult);
     }
