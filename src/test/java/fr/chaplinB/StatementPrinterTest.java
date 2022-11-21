@@ -24,7 +24,7 @@ class StatementPrinterTest {
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
         clockTicker = new ClockTicker();
-        initialAmount = Amount.valueOf(new BigDecimal("200"));
+        initialAmount = Amount.valueOf(new BigDecimal("200.00"));
         accountStatement = new AccountStatement();
         bankAccount = new BankAccount(initialAmount, accountStatement, clockTicker);
     }
@@ -37,8 +37,8 @@ class StatementPrinterTest {
         bankAccount.printStatement();
         //Assert
         String expectedResult = "Operation | Date | Amount\r\n" +
-                                "DEPOSIT | 2022-12-10 | 200\r\n" +
-                                "Your balance : 100";
+                                "DEPOSIT | 2022-12-10 | 200.00\r\n" +
+                                "Your balance : 200.00";
         assertThat(outputStreamCaptor.toString().trim()).isEqualTo(expectedResult);
     }
 
