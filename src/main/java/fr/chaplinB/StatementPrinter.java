@@ -3,7 +3,7 @@ package fr.chaplinB;
 import java.util.List;
 
 public class StatementPrinter {
-    public void print(List<Operation> allOperations) {
+    public void print(List<Operation> allOperations, Amount balance) {
         System.out.println("Operation | Date | Amount");
         allOperations.forEach(
                 operation -> {
@@ -14,5 +14,6 @@ public class StatementPrinter {
                             operation.amount().toString());
                 }
         );
+        System.out.println("Your balance : " + balance);
     }
 }

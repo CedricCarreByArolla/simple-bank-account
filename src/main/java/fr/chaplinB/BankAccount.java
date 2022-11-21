@@ -56,6 +56,6 @@ public class BankAccount {
     }
 
     public void printStatement() {
-        statementPrinter.print(getAccountStatement());
+        statementPrinter.print(getAccountStatement(), getBalance());
     }
 }
